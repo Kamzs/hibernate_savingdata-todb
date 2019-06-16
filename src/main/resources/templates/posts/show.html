@@ -9,7 +9,6 @@
 <body>
 
 
-
 <div class="container">
     <h1>Post id:</h1>
     <h3 th:text="${post.id}"></h3>
@@ -19,6 +18,9 @@
         <div class="form-group">
             <label>Content</label>
             <input th:field="*{description}" type="text"
+                   class="form-control input-small"
+                   placeholder="Comment" required>
+            <input th:field="*{post}" type="hidden"
                    class="form-control input-small"
                    placeholder="Comment" required>
         </div>

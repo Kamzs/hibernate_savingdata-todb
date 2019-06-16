@@ -14,7 +14,7 @@ public class Comment {
 
     private String description;
 
-    @ManyToOne
+    @ManyToOne(cascade =CascadeType.ALL)
     private Post post;
 
 

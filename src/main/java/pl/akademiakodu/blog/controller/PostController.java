@@ -34,8 +34,11 @@ public class PostController {
     // posts/1
     @GetMapping("/{id}")
     public String showPost(@PathVariable Integer id, ModelMap modelMap) {
-        modelMap.put("post", postRepository.findById(id).get());
-        modelMap.put("comment",new Comment());
+        Post post = postRepository.findById(id).get();
+        modelMap.put("post", post);
+        Comment comment = new Comment();
+        comment.setPost(post);
+        modelMap.put("comment",comment);
         return "posts/show";
     }
 
