@@ -2,10 +2,9 @@ package pl.akademiakodu.blog.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,6 +16,9 @@ public class Post {
 
     private String content;
 
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments = new
+            ArrayList<>();
 
 
 }
