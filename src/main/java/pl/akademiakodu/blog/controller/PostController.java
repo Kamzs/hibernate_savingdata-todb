@@ -2,10 +2,8 @@ package pl.akademiakodu.blog.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.akademiakodu.blog.model.Post;
 import pl.akademiakodu.blog.repository.PostRepository;
 
@@ -16,20 +14,26 @@ public class PostController {
 
     private PostRepository postRepository;
 
-    public PostController(PostRepository postRepository){
+    public PostController(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
 
     @GetMapping("/add")
-    public String addPost(ModelMap modelMap){
-        modelMap.put("post",new Post());
+    public String addPost(ModelMap modelMap) {
+        modelMap.put("post", new Post());
         return "posts/add";
     }
 
     @PostMapping("")
-    public String createPost(@ModelAttribute Post post, ModelMap modelMap){
+    public String createPost(@ModelAttribute Post post) {
         postRepository.save(post);
-        modelMap.put("post",post);
+        return "redirect:/posts/"+post.getId();
+    }
+
+    // posts/1
+    @GetMapping("/{id}")
+    public String showPost(@PathVariable Integer id, ModelMap modelMap) {
+        modelMap.put("post", postRepository.findById(id).get());
         return "posts/show";
     }
 
