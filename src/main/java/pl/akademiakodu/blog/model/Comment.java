@@ -17,5 +17,9 @@ public class Comment {
     @ManyToOne(cascade =CascadeType.ALL)
     private Post post;
 
+    @Override
+    public String toString(){
+        return getDescription();
+    }
 
 }

@@ -10,9 +10,18 @@
 
 
 <div class="container">
+    <div class="alert alert-success" th:if="${message}">
+        <strong th:if="${message}" th:text="${message}"></strong>
+    </div>
+
     <h1>Post id:</h1>
     <h3 th:text="${post.id}"></h3>
     <p th:text="${post.content}"></p>
+    <h2>Comments:</h2>
+    <ul class="list-group">
+        <li class="list-group-item" th:each="comment: ${comments}"
+            th:text="${comment}"></li>
+    </ul>
     <h3>Dodaj komentarz</h3>
     <form th:object="${comment}" th:action="@{/comments}" th:method="post">
         <div class="form-group">
@@ -26,6 +35,11 @@
         </div>
         <button type="submit" class="btn btn-primary btn-lg ">Dodaj</button>
     </form>
+
+
+
+
+
 </div>
 
 
